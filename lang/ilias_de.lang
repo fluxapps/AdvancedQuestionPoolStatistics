@@ -1,0 +1,41 @@
+cols_result #:# Resultat
+cols_value #:# Wert
+cols_question_id #:# Question ID
+cols_question_title #:# Titel
+cols_points #:# Punkte
+cols_percentage #:# Prozentwert
+cols_number_answers #:# Antworten
+cols_id #:# ID
+cols_title #:# Trigger
+cols_operator #:# Operator
+cols_value #:# Wert
+cols_inform #:# Benutzer
+cols_date #:# Datum
+cols_interval #:# Intervall
+cols_usercomplete #:# Benutzer abgeschlossen (%)
+cols_actions #:# Aktionen
+
+form_trigger #:# Trigger
+form_operator #:# Operator
+form_value #:# Wert
+form_user #:# Benutzer
+form_user_completed #:# Benutzer abgeschlossen (%)
+form_date #:# Datum
+form_interval #:# Interval
+
+header_btn_add #:# Trigger Hinzufügen
+system_account_msg_success #:# Erfolgreich
+btn_back #:# Zurück
+list_edit_trigger #:# Trigger bearbeiten
+list_delete_trigger #:# Trigger löschen
+list_copy_trigger #:# Trigger Kopieren
+list_trigger_trigger #:# Trigger aktivieren
+
+form_update #:# Update
+form_cancel #:# Cancel
+
+form_headtitle_new #:# Neuer Trigger
+form_headtitle_old #:# Trigger bearbeiten
+form_create #:# Erstellen
+form_update #:# Update
+trigger_not_executed #:# Trigger ist nicht erfüllt

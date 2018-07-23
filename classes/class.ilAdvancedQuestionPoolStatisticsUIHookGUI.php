@@ -25,7 +25,7 @@ class ilAdvancedQuestionPoolStatisticsUIHookGUI extends ilUIHookPluginGUI {
 		$this->pl = ilAdvancedQuestionPoolStatisticsPlugin::getInstance();
 		$this->ctrl = $ilCtrl;
 		$this->ref_id = $_GET['ref_id'];
-		//$this->access = new ilAdvancedQuestionPoolStatisticsAccess($this->ref_id);
+		$this->access = new ilAdvancedQuestionPoolStatisticsAccess($this->ref_id);
 	}
 
 
@@ -48,7 +48,7 @@ class ilAdvancedQuestionPoolStatisticsUIHookGUI extends ilUIHookPluginGUI {
 		if ($a_part == 'sub_tabs') {
 			if ($this->checkTest()) {
 				$tabs = $a_par['tabs'];
-				$this->ctrl->saveParameterByClass('ilAdvancedQuestionPoolStatisticsGUI', 'ref_id');
+				$this->ctrl->setParameterByClass('ilAdvancedQuestionPoolStatisticsSettingsGUI', 'ref_id',$this->ref_id);
 				//	$tabs->removeSubTab('tst_results_aggregated');
 				if ($this->access->hasCurrentUserAlertAccess()) {
 					$link = $this->ctrl->getLinkTargetByClass(array(

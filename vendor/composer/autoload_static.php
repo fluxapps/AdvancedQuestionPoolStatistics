@@ -252,9 +252,14 @@ class ComposerStaticInit6af9b6d8af37dfa16a5d180e67bb3dd6
         'ilAccessPermissionsStatusTableGUI' => __DIR__ . '/../..' . '/../../../../../../../Services/AccessControl/classes/class.ilAccessPermissionsStatusTableGUI.php',
         'ilAdminSubItemsTableGUI' => __DIR__ . '/../..' . '/../../../../../../../Services/Repository/classes/class.ilAdminSubItemsTableGUI.php',
         'ilAdvSelectInputGUI' => __DIR__ . '/../..' . '/../../../../../../../Services/Form/classes/class.ilAdvSelectInputGUI.php',
+        'ilAdvancedQuestionPoolStatisticsAccess' => __DIR__ . '/../..' . '/classes/class.ilAdvancedQuestionPoolStatisticsAccess.php',
+        'ilAdvancedQuestionPoolStatisticsAlertFormGUI' => __DIR__ . '/../..' . '/classes/Settings/class.ilAdvancedQuestionPoolStatisticsAlertFormGUI.php',
+        'ilAdvancedQuestionPoolStatisticsAlertTableGUI' => __DIR__ . '/../..' . '/classes/Settings/class.ilAdvancedQuestionPoolStatisticsAlertTableGUI.php',
+        'ilAdvancedQuestionPoolStatisticsConstantTranslator' => __DIR__ . '/../..' . '/classes/Settings/class.ilAdvancedQuestionPoolStatisticsConstantTranslator.php',
         'ilAdvancedQuestionPoolStatisticsGUI' => __DIR__ . '/../..' . '/classes/class.ilAdvancedQuestionPoolStatisticsGUI.php',
         'ilAdvancedQuestionPoolStatisticsPlugin' => __DIR__ . '/../..' . '/classes/class.ilAdvancedQuestionPoolStatisticsPlugin.php',
         'ilAdvancedQuestionPoolStatisticsSender' => __DIR__ . '/../..' . '/classes/class.ilAdvancedQuestionPoolStatisticsSender.php',
+        'ilAdvancedQuestionPoolStatisticsSettingsGUI' => __DIR__ . '/../..' . '/classes/Settings/class.ilAdvancedQuestionPoolStatisticsSettingsGUI.php',
         'ilAdvancedQuestionPoolStatisticsUIHookGUI' => __DIR__ . '/../..' . '/classes/class.ilAdvancedQuestionPoolStatisticsUIHookGUI.php',
         'ilAdvancedSelectionListGUI' => __DIR__ . '/../..' . '/../../../../../../../Services/UIComponent/AdvancedSelectionList/classes/class.ilAdvancedSelectionListGUI.php',
         'ilAlphabetInputGUI' => __DIR__ . '/../..' . '/../../../../../../../Services/Form/classes/class.ilAlphabetInputGUI.php',
@@ -948,6 +953,7 @@ class ComposerStaticInit6af9b6d8af37dfa16a5d180e67bb3dd6
         'ilassMarkSchemaTest' => __DIR__ . '/../..' . '/../../../../../../../Modules/Test/test/ilassMarkSchemaTest.php',
         'ilassMarkTest' => __DIR__ . '/../..' . '/../../../../../../../Modules/Test/test/ilassMarkTest.php',
         'pdoDB' => __DIR__ . '/../..' . '/../../../../../../../Services/ActiveRecord/Connector/DataBase/class.pdoDB.php',
+        'xaqsTriggers' => __DIR__ . '/../..' . '/ActiveRecords/xaqsTriggers.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

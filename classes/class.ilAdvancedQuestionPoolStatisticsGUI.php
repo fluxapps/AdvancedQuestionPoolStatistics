@@ -32,16 +32,8 @@ class ilAdvancedQuestionPoolStatisticsGUI {
 		$nextClass = $this->ctrl->getNextClass();
 
 		switch ($nextClass){
-			case 'iladvancedteststatisticsavggui':
-				$iladvancedteststatisticsavggui = new ilAdvancedTestStatisticsAvgGUI();
-				$this->ctrl->forwardCommand($iladvancedteststatisticsavggui);
-				break;
-			case 'iladvancedteststatisticsagggui':
-				$iladvancedteststatisticsagggui = new ilAdvancedTestStatisticsAggGUI();
-				$this->ctrl->forwardCommand($iladvancedteststatisticsagggui);
-				break;
-			case 'iladvancedteststatisticssettingsgui':
-				$iladvancedteststatisticssettingsgui = new ilAdvancedTestStatisticsSettingsGUI();
+			case 'iladvancedquestionpoolstatisticssettingsgui':
+				$iladvancedteststatisticssettingsgui = new ilAdvancedQuestionPoolStatisticsSettingsGUI();
 				$this->ctrl->forwardCommand($iladvancedteststatisticssettingsgui);
 				break;
 			default: $cmd = $this->ctrl->getCmd();

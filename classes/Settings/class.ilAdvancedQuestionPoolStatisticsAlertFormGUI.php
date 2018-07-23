@@ -2,6 +2,7 @@
 
 class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 
+
 	/**
 	 * @var ilAdvancedTestStatisticsPlugin
 	 */
@@ -15,7 +16,7 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 	 */
 	protected $parent_gui;
 	/**
-	 * @var xatsFilter
+	 * @var xaqsTriggers
 	 */
 	protected $object;
 	protected $operators = array( '>', '<', '>=', '<=', '!=', '==' );
@@ -26,8 +27,18 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 		"avg_result_finished_run_one" => "Average result(%) passed tests (Run 1)",
 		"avg_result_passed_run_one" => "Average result(%) finished tests (Run 1)",
 		"avg_result_passed_run_two" => "Average result(%) passed tests (Run 2)",
-		"avg_result_finished_run_two" => "Average result(%) finished tests (Run 2)"
+		"avg_result_finished_run_two" => "Average result(%) finished tests (Run 2)",
+		'Total number of participants who started the test',
+		'Total finished tests (Participants that used up all possible passes)',
+		'Average test processing time',
+		'Total passed tests',
+		'Average points of passed tests',
+		'Average processing time of all passed tests',
 	);
+
+
+
+	protected $interval_options = array('daily','weekly','monthly');
 
 
 	/**
@@ -35,15 +46,26 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 	 *
 	 * @param            $parent_gui
 	 */
-	public function __construct($parent_gui) {
+	public function __construct($parent_gui, xaqsTriggers $triggers) {
 		global $ilCtrl, $tpl;
 
+		$this->object = $triggers;
 		$this->ctrl = $ilCtrl;
 		$this->tpl = $tpl;
 		$this->pl = ilAdvancedQuestionPoolStatisticsPlugin::getInstance();
 		$this->ref_id = $_GET['ref_id'];
+		$this->is_new = ($this->object->getId() != NULL);
 		$this->parent_gui = $parent_gui;
 		$this->setFormAction($this->ctrl->getFormAction($this->parent_gui));
+
+
+		$test = new ilObjQuestionPool($this->ref_id);
+		$questions = $test->getAllQuestions();
+
+		foreach ($questions as $question) {
+			$this->extendedFields[$question['question_id']] = $question['title'];
+		}
+
 
 
 		parent::__construct();
@@ -54,18 +76,71 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 
 	public function initForm() {
 		$this->setTarget('_top');
+		$this->setFormAction($this->ctrl->getFormAction($this->parent_gui));
 		$this->initButtons();
 
-		$alerts = new ilAlertFormGUI();
-		$alerts->appendToForm($this);
+		$te = new ilSelectInputGUI($this->pl->txt('form_trigger'), 'trigger');
+		$te->setOptions($this->extendedFields);
+		$te->setInfo('Trigger compared to value');
+		$te->setRequired(true);
+		$this->addItem($te);
+
+		$te = new ilSelectInputGUI($this->pl->txt('form_operator'), 'operator');
+		$te->setOptions($this->operators);
+		$te->setInfo('Operator for comparison');
+		$te->setRequired(false);
+		$this->addItem($te);
+
+		$te = new ilNumberInputGUI($this->pl->txt('form_value'), 'value');
+		$te->setRequired(true);
+		$te->setInfo('Value to be compared with trigger');
+		$te->allowDecimals(true);
+		$this->addItem($te);
+
+		$user = new ilTextInputGUI($this->pl->txt('form_user'), 'user');
+		$user->setDataSource($this->ctrl->getLinkTargetByClass(array(
+			ilUIPluginRouterGUI::class,
+			ilAdvancedQuestionPoolStatisticsPlugin::class
+		), ilAdvancedQuestionPoolStatisticsPlugin::CMD_ADD_USER_AUTO_COMPLETE, "", true));
+		$user->setInfo('User which will receive the notification');
+		$this->addItem($user);
+
+
+		$te = new ilNumberInputGUI($this->pl->txt('form_user_completed'),'user_completed');
+		$te->setRequired(true);
+		$te->setInfo('Condition how many users completed the test (%) of course members');
+		$this->addItem($te);
+
+		$te = new ilDateTimeInputGUI($this->pl->txt('form_date'),'date');
+		$te->setRequired(true);
+		$te->setInfo('The date when the trigger is checked for the first time');
+		$this->addItem($te);
+
+		$te = new ilSelectInputGUI($this->pl->txt('form_interval'),'interval');
+		$te->setRequired(true);
+		$te->setInfo('The interval within the trigger is checked');
+		$te->setOptions($this->interval_options);
+		$this->addItem($te);
+
+
+
+
+
+
 	}
 
 
 	public function initButtons() {
-		$this->ctrl->setParameterByClass(ilAdvancedQuestionPoolStatisticsGUI::class, 'ref_id', $this->ref_id);
-		$this->addCommandButton(ilAdvancedQuestionPoolStatisticsSettingsGUI::CMD_CREATE_TRIGGER, $this->pl->txt('form_update'));
+		if (!$this->is_new) {
+			$this->setTitle($this->pl->txt('form_headtitle_new'));
+			$this->addCommandButton(ilAdvancedQuestionPoolStatisticsSettingsGUI::CMD_CREATE_TRIGGER, $this->pl->txt('form_create'));
+		} else {
+			$this->setTitle($this->pl->txt('form_headtitle_old'));
+			$this->addCommandButton(ilAdvancedQuestionPoolStatisticsSettingsGUI::CMD_UPDATE_TRIGGER, $this->pl->txt('form_update'));
+		}
 		$this->addCommandButton(ilAdvancedQuestionPoolStatisticsSettingsGUI::CMD_CANCEL, $this->pl->txt('form_cancel'));
 	}
+
 
 
 	public function save() {
@@ -73,9 +148,13 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 			return false;
 		}
 
-		$triggers = xatsTriggers::get();
-		foreach ($triggers as $trigger) {
-			$trigger->delete();
+		$this->object->setRefId($_GET['ref_id']);
+
+		if(!xaqsTriggers::where(array('id' => $this->object->getId()))->hasSets()){
+			$this->object->create();
+		}
+		else {
+			$this->object->update();
 		}
 
 		return true;
@@ -87,6 +166,22 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 			return false;
 		}
 
+		$this->object->setTriggerName($this->getInput('trigger'));
+		$this->object->setOperator($this->getInput('operator'));
+		$this->object->setValue($this->getInput('value'));
+		$this->object->setUserId($this->getInput('user'));
+		$this->object->setUserPercentage($this->getInput('user_completed'));
+		$date = $this->getInput('date');
+		$timestamp = strtotime($date['date']);
+		$this->object->setDatesender($timestamp);
+		$this->object->setIntervalls($this->getInput('interval'));
+
+
 		return true;
+	}
+
+	public function fillForm(){
+		$array = array('trigger' => $this->object->getTriggerName(), 'operator' => $this->object->getOperator(),'value' => $this->object->getValue());
+		$this->setValuesByArray($array);
 	}
 }
