@@ -45,6 +45,7 @@ class ilAdvancedQuestionPoolStatisticsAlertTableGUI extends ilTable2GUI {
 		$b_print->setUrl($this->ctrl->getLinkTargetByClass(ilAdvancedQuestionPoolStatisticsSettingsGUI::class, ilAdvancedQuestionPoolStatisticsSettingsGUI::CMD_ADD_TRIGGER));
 		$this->toolbar->addButtonInstance($b_print);
 
+
 		$this->addColumns();
 		$this->parseData();
 	}
