@@ -23,6 +23,7 @@
     "classmap": [
       "./classes/",
       "./ActiveRecords/",
+      "../AdvancedTestStatistics/classes",
       "../../../../../../../Services/UIComponent",
       "../../../../../../../Services/Table",
       "../../../../../../../Services/Form",
