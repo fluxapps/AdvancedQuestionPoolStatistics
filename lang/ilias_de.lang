@@ -39,3 +39,5 @@ form_headtitle_old #:# Trigger bearbeiten
 form_create #:# Erstellen
 form_update #:# Update
 trigger_not_executed #:# Trigger ist nicht erfüllt
+
+system_account_msg_success_trigger#:#Trigger wurde erfüllt.

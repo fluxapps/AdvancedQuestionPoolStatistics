@@ -74,10 +74,18 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 	}
 
 
-	public function initForm() {
+    /**
+     *
+     */
+    public function initForm() {
 		$this->setTarget('_top');
 		$this->setFormAction($this->ctrl->getFormAction($this->parent_gui));
 		$this->initButtons();
+
+        if ($trigger_id = $this->object->getId()) {
+            $hidden = new ilHiddenInputGUI('trigger_id');
+            $this->addItem($hidden);
+        }
 
 		$te = new ilSelectInputGUI($this->pl->txt('form_trigger'), 'trigger');
 		$te->setOptions($this->extendedFields);
@@ -121,16 +129,13 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 		$te->setInfo('The interval within the trigger is checked');
 		$te->setOptions($this->interval_options);
 		$this->addItem($te);
-
-
-
-
-
-
 	}
 
 
-	public function initButtons() {
+    /**
+     *
+     */
+    public function initButtons() {
 		if (!$this->is_new) {
 			$this->setTitle($this->pl->txt('form_headtitle_new'));
 			$this->addCommandButton(ilAdvancedQuestionPoolStatisticsSettingsGUI::CMD_CREATE_TRIGGER, $this->pl->txt('form_create'));
@@ -142,26 +147,26 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 	}
 
 
-
-	public function save() {
+    /**
+     * @return bool
+     */
+    public function save() {
 		if (!$this->fill()) {
 			return false;
 		}
 
 		$this->object->setRefId($_GET['ref_id']);
 
-		if(!xaqsTriggers::where(array('id' => $this->object->getId()))->hasSets()){
-			$this->object->create();
-		}
-		else {
-			$this->object->update();
-		}
+		$this->object->store();
 
 		return true;
 	}
 
 
-	public function fill() {
+    /**
+     * @return bool
+     */
+    public function fill() {
 		if (!$this->checkInput()) {
 			return false;
 		}
@@ -169,7 +174,7 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 		$this->object->setTriggerName($this->getInput('trigger'));
 		$this->object->setOperator($this->getInput('operator'));
 		$this->object->setValue($this->getInput('value'));
-		$this->object->setUserId($this->getInput('user'));
+		$this->object->setUserId(ilObjUser::_lookupId($this->getInput('user')));
 		$this->object->setUserPercentage($this->getInput('user_completed'));
 		$date = $this->getInput('date');
 		$timestamp = strtotime($date['date']);
@@ -180,8 +185,20 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 		return true;
 	}
 
-	public function fillForm(){
-		$array = array('trigger' => $this->object->getTriggerName(), 'operator' => $this->object->getOperator(),'value' => $this->object->getValue());
+    /**
+     *
+     */
+    public function fillForm(){
+		$array = array(
+            'trigger_id' => $this->object->getId(),
+            'trigger' => $this->object->getTriggerName(),
+            'operator' => $this->object->getOperator(),
+            'value' => $this->object->getValue(),
+            'user' => ilObjUser::_lookupLogin($this->object->getUserId()),
+            'user_completed' => $this->object->getUserPercentage(),
+            'date' => array("date" => date('Y-m-d', $this->object->getDatesender())),
+            'interval' => $this->object->getIntervalls()
+        );
 		$this->setValuesByArray($array);
 	}
 }

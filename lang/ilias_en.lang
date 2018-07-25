@@ -40,3 +40,4 @@ form_headtitle_old #:# Edit Trigger
 form_create #:# Create
 form_update #:# Update
 trigger_not_executed #:# Trigger not satisfied
+system_account_msg_success_trigger#:#Trigger was satisfied.

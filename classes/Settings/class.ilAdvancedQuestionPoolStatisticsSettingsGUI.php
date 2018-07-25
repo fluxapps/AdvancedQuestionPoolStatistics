@@ -142,6 +142,21 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
 	}
 
 
+    /**
+     * update Trigger
+     */
+    public function updateTrigger(){
+        $form = new ilAdvancedQuestionPoolStatisticsAlertFormGUI($this, xaqsTriggers::find($_POST[self::IDENTIFIER_TRIGGER]));
+        $form->setValuesByPost();
+
+        if($form->save()){
+            ilUtil::sendSuccess($this->pl->txt('system_account_msg_success'),true);
+            $this->ctrl->redirect(new ilAdvancedTestStatisticsSettingsGUI, ilAdvancedTestStatisticsSettingsGUI::CMD_DISPLAY_TRIGGERS);
+        }
+
+        $this->tpl->setContent($form->getHTML());
+    }
+
 	/**
 	 * copy the trigger
 	 */
@@ -175,6 +190,7 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
 	 * Activate trigger
 	 */
 	public function trigger(){
+	    /** @var xaqsTriggers $trigger */
 		$trigger = xaqsTriggers::find($_GET[self::IDENTIFIER_TRIGGER]);
 
 		/*
@@ -239,20 +255,18 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
 				}
 				return false;
 			default:
-				break;
+                throw new ilException('No operator given for trigger.');
+                break;
 		}
 
 		$sender = new ilAdvancedQuestionPoolStatisticsSender();
 		try {
 			$sender->createNotification($this->ref_id_course,$trigger->getUserId(),$this->ref_id,$trigger);
 			ilUtil::sendSuccess($this->pl->txt('system_account_msg_success_trigger'),true);
-		}
-		catch (Exception $exception){
+		} catch (Exception $exception){
 
 		}
 		$this->ctrl->redirect($this,self::CMD_DISPLAY_TRIGGERS);
-
-
 	}
 
 
