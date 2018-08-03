@@ -23,11 +23,11 @@ class xaqsTriggers extends ActiveRecord {
 	 */
 	protected $ref_id;
 	/**
-	 * @var int
+	 * @var String
 	 *
 	 * @con_has_field   true
-	 * @con_fieldtype   integer
-	 * @con_length      8
+	 * @con_fieldtype   text
+	 * @con_length      256
 	 */
 	protected $trigger_name;
 	/**
@@ -124,7 +124,7 @@ class xaqsTriggers extends ActiveRecord {
 
 
 	/**
-	 * @return int
+	 * @return String
 	 */
 	public function getTriggerName() {
 		return $this->trigger_name;
@@ -132,7 +132,7 @@ class xaqsTriggers extends ActiveRecord {
 
 
 	/**
-	 * @param int $trigger_name
+	 * @param String $trigger_name
 	 */
 	public function setTriggerName($trigger_name) {
 		$this->trigger_name = $trigger_name;

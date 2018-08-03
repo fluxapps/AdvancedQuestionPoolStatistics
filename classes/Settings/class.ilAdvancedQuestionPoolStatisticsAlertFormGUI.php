@@ -20,21 +20,6 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 	 */
 	protected $object;
 	protected $operators = array( '>', '<', '>=', '<=', '!=', '==' );
-	protected $extendedFields = array(
-		"avg_points_finished" => "Average Points finished tests",
-		"avg_result_passed" => "Average result passed tests",
-		"avg_result_finished" => "Average result(%) finished tests",
-		"avg_result_finished_run_one" => "Average result(%) passed tests (Run 1)",
-		"avg_result_passed_run_one" => "Average result(%) finished tests (Run 1)",
-		"avg_result_passed_run_two" => "Average result(%) passed tests (Run 2)",
-		"avg_result_finished_run_two" => "Average result(%) finished tests (Run 2)",
-		'Total number of participants who started the test',
-		'Total finished tests (Participants that used up all possible passes)',
-		'Average test processing time',
-		'Total passed tests',
-		'Average points of passed tests',
-		'Average processing time of all passed tests',
-	);
 
 
 
@@ -58,9 +43,25 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 		$this->parent_gui = $parent_gui;
 		$this->setFormAction($this->ctrl->getFormAction($this->parent_gui));
 
+        $this->extendedFields = array(
+            "avg_points_finished" => $this->pl->txt("avg_points_finished"),
+            "avg_result_passed" => $this->pl->txt("avg_result_passed"),
+            "avg_result_finished" => $this->pl->txt("avg_result_finished"),
+            "avg_result_finished_run_one" => $this->pl->txt("avg_result_finished_run_one"),
+            "avg_result_passed_run_one" => $this->pl->txt("avg_result_passed_run_one"),
+            "avg_result_passed_run_two"  => $this->pl->txt("avg_result_passed_run_two"),
+            "avg_result_finished_run_two" => $this->pl->txt("avg_result_finished_run_two"),
+            'nr_participants_started' => $this->pl->txt('nr_participants_started'),
+            'nr_tests_finished' => $this->pl->txt('nr_tests_finished'),
+            'avg_test_time' => $this->pl->txt('avg_test_time'),
+            'nr_tests_passed' => $this->pl->txt('nr_tests_passed'),
+            'avg_points_passed' => $this->pl->txt('avg_points_passed'),
+            'avg_passed_test_time' => $this->pl->txt('avg_passed_test_time'),
+        );
 
-		$test = new ilObjQuestionPool($this->ref_id);
-		$questions = $test->getAllQuestions();
+		$qst_pool = new ilObjQuestionPool($this->ref_id);
+		$question_ids = $qst_pool->getAllQuestions();
+		$questions = $qst_pool->getQuestionDetails($question_ids);
 
 		foreach ($questions as $question) {
 			$this->extendedFields[$question['question_id']] = $question['title'];

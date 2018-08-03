@@ -214,7 +214,7 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
 		$value = $trigger->getValue();
 
 		//if True trigger is a question
-		if($triggername > 12){
+		if(is_int($triggername)){
 			$valuereached = 0;
 		}
 		else{

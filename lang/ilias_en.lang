@@ -41,3 +41,17 @@ form_create #:# Create
 form_update #:# Update
 trigger_not_executed #:# Trigger not satisfied
 system_account_msg_success_trigger#:#Trigger was satisfied.
+
+avg_points_finished#:#Average Points finished tests
+avg_points_passed#:#Average points of passed tests
+avg_result_passed#:#Average result (%) passed tests
+avg_result_finished#:#Average result (%) finished tests
+avg_result_finished_run_one#:#Average result (%) passed tests (Run 1)
+avg_result_passed_run_one#:#Average result (%) finished tests (Run 1)
+avg_result_passed_run_two#:#Average result (%) passed tests (Run 2)
+avg_result_finished_run_two#:#Average result (%) finished tests (Run 2)
+avg_test_time#:#Average test processing time
+avg_passed_test_time#:#Average processing time of all passed tests
+nr_participants_started#:#Total number of participants who started the test
+nr_tests_finished#:#Total finished tests (Participants that used up all possible passes)
+nr_tests_passed#:#Total passed tests
