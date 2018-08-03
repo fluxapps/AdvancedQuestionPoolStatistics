@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class ilAdvancedTestStatisticsConstantTranslator
+ * Class ilAdvancedQuestionPoolStatisticsConstantTranslator
  *
  * @author Silas Stulz <sst@studer-raimann.ch>
  *

@@ -4,7 +4,7 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 
 
 	/**
-	 * @var ilAdvancedTestStatisticsPlugin
+	 * @var ilAdvancedQuestionPoolStatisticsPlugin
 	 */
 	protected $pl;
 	/**
@@ -12,7 +12,7 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 	 */
 	protected $ctrl;
 	/**
-	 * @var ilAdvancedTestStatisticsSettingsGUI
+	 * @var ilAdvancedQuestionPoolStatisticsSettingsGUI
 	 */
 	protected $parent_gui;
 	/**
@@ -42,7 +42,7 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 
 
 	/**
-	 * ilAdvancedTestStatisticsAlertFormGUI constructor.
+	 * ilAdvancedQuestionPoolStatisticsAlertFormGUI constructor.
 	 *
 	 * @param            $parent_gui
 	 */

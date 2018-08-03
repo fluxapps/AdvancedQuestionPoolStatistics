@@ -2,7 +2,7 @@
 
 /**
  * Class ilAdvancedQuestionPoolStatisticsSettingsGUI
- * @ilCtrl_isCalledBy ilAdvancedQuestionPoolStatisticsSettingsGUI: ilUIPluginRouterGUI, ilAdvancedTestStatisticsGUI
+ * @ilCtrl_isCalledBy ilAdvancedQuestionPoolStatisticsSettingsGUI: ilUIPluginRouterGUI, ilAdvancedTestStatisticsGUI, ilAdvancedQuestionPoolStatisticsGUI
  * @ilCtrl_Calls ilAdvancedQuestionPoolStatisticsSettingsGUI: ilAdvancedTestStatisticsPlugin
  */
 class ilAdvancedQuestionPoolStatisticsSettingsGUI {
@@ -151,7 +151,7 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
 
         if($form->save()){
             ilUtil::sendSuccess($this->pl->txt('system_account_msg_success'),true);
-            $this->ctrl->redirect(new ilAdvancedTestStatisticsSettingsGUI, ilAdvancedTestStatisticsSettingsGUI::CMD_DISPLAY_TRIGGERS);
+            $this->ctrl->redirect($this, self::CMD_DISPLAY_TRIGGERS);
         }
 
         $this->tpl->setContent($form->getHTML());
@@ -269,5 +269,10 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
 		$this->ctrl->redirect($this,self::CMD_DISPLAY_TRIGGERS);
 	}
 
-
+    /**
+     *
+     */
+	protected function cancel() {
+	    $this->ctrl->redirect($this, self::CMD_DISPLAY_TRIGGERS);
+    }
 }

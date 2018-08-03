@@ -33,8 +33,8 @@ class ilAdvancedQuestionPoolStatisticsGUI {
 
 		switch ($nextClass){
 			case 'iladvancedquestionpoolstatisticssettingsgui':
-				$iladvancedteststatisticssettingsgui = new ilAdvancedQuestionPoolStatisticsSettingsGUI();
-				$this->ctrl->forwardCommand($iladvancedteststatisticssettingsgui);
+				$ilAdvancedQuestionPoolStatisticsSettingsGUI = new ilAdvancedQuestionPoolStatisticsSettingsGUI();
+				$this->ctrl->forwardCommand($ilAdvancedQuestionPoolStatisticsSettingsGUI);
 				break;
 			default: $cmd = $this->ctrl->getCmd();
 				$this->{$cmd}();

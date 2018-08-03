@@ -1,6 +1,6 @@
 {
-  "name": "studer-raimann.ch/advancedteststatistics",
-  "description": "ILIAS 5.x AdvancedTestStatistics Plugin",
+  "name": "studer-raimann.ch/advancedquestionpoolstatistics",
+  "description": "ILIAS 5.x AdvancedQuestionPoolStatistics Plugin",
   "type": "project",
   "license": "GPL-3.0+",
   "authors": [

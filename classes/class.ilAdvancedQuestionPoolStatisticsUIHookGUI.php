@@ -14,7 +14,7 @@ class ilAdvancedQuestionPoolStatisticsUIHookGUI extends ilUIHookPluginGUI {
 	 */
 	protected $ctrl;
 	/**
-	 * @var ilAdvancedTestStatisticsPlugin
+	 * @var ilAdvancedQuestionPoolStatisticsPlugin
 	 */
 	protected $pl;
 
@@ -47,17 +47,21 @@ class ilAdvancedQuestionPoolStatisticsUIHookGUI extends ilUIHookPluginGUI {
 		 */
 		if ($a_part == 'sub_tabs') {
 			if ($this->checkTest()) {
+			    global $tpl;
 				$tabs = $a_par['tabs'];
 				$this->ctrl->setParameterByClass('ilAdvancedQuestionPoolStatisticsSettingsGUI', 'ref_id',$this->ref_id);
-				//	$tabs->removeSubTab('tst_results_aggregated');
 				if ($this->access->hasCurrentUserAlertAccess()) {
 					$link = $this->ctrl->getLinkTargetByClass(array(
 						'ilUIPluginRouterGUI',
 						'ilAdvancedQuestionPoolStatisticsGUI',
 						'ilAdvancedQuestionPoolStatisticsSettingsGUI'
-					), ilAdvancedTestStatisticsSettingsGUI::CMD_DISPLAY_TRIGGERS);
+					), ilAdvancedQuestionPoolStatisticsSettingsGUI::CMD_DISPLAY_TRIGGERS);
 					$tabs->addTab("alerts", "Alerts", $link);
 				}
+
+                // deactivate tabs via js
+                $code = "$('#tab_alerts').removeClass('active');";
+                $tpl->addOnLoadCode($code);
 			}
 		}
 	}

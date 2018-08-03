@@ -11,7 +11,7 @@ class ilAdvancedQuestionPoolStatisticsAccess {
 
 
 	public function __construct($ref_id) {
-		$this->pl = ilAdvancedTestStatisticsPlugin::getInstance();
+		$this->pl = ilAdvancedQuestionPoolStatisticsPlugin::getInstance();
 		$this->ref_id = $ref_id;
 	}
 

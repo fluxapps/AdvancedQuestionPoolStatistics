@@ -12,7 +12,7 @@ class ilAdvancedQuestionPoolStatisticsAlertTableGUI extends ilTable2GUI {
 	protected $ctrl;
 	protected $parent_obj;
 	/**
-	 * @var ilAdvancedTestStatisticsPlugin
+	 * @var ilAdvancedQuestionPoolStatisticsPlugin
 	 */
 	protected $pl;
 	/**
@@ -155,7 +155,7 @@ class ilAdvancedQuestionPoolStatisticsAlertTableGUI extends ilTable2GUI {
 		$current_selection_list->setListTitle($this->pl->txt('cols_actions'));
 		$current_selection_list->setId('_actions' . $a_set['id']);
 		$current_selection_list->setUseImages(false);
-		$this->ctrl->setParameterByClass('ilAdvancedTestStatisticsSettingsGUI', 'trigger_id', $a_set['id']);
+		$this->ctrl->setParameterByClass(ilAdvancedQuestionPoolStatisticsSettingsGUI::class, 'trigger_id', $a_set['id']);
 
 		$current_selection_list->addItem($this->pl->txt('list_trigger_trigger'), ilAdvancedQuestionPoolStatisticsSettingsGUI::CMD_TRIGGER_TRIGGER,$this->ctrl->getLinkTargetByClass(ilAdvancedQuestionPoolStatisticsSettingsGUI::class,ilAdvancedQuestionPoolStatisticsSettingsGUI::CMD_TRIGGER_TRIGGER));
 		$current_selection_list->addItem($this->pl->txt('list_edit_trigger'), ilAdvancedQuestionPoolStatisticsSettingsGUI::CMD_EDIT_TRIGGER, $this->ctrl->getLinkTargetByClass(ilAdvancedQuestionPoolStatisticsSettingsGUI::class, ilAdvancedQuestionPoolStatisticsSettingsGUI::CMD_EDIT_TRIGGER));
