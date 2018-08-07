@@ -102,12 +102,13 @@ class ilAdvancedQuestionPoolStatisticsAlertTableGUI extends ilTable2GUI {
 	public function parseData() {
 		$triggers = xaqsTriggers::where(array('ref_id' => $this->ref_id))->get();
 
-		foreach ($triggers as $trigger) {
+		/** @var xaqsTriggers $trigger */
+        foreach ($triggers as $trigger) {
 
 			$row = array();
 			$row['id'] = $trigger->getId();
 
-			$t = ilAdvancedQuestionPoolStatisticsConstantTranslator::getExtendedFieldforKey($trigger->getTriggername(),$this->ref_id);
+			$t = $this->pl->txt($trigger->getTriggerName());
 			$row['trigger'] = $t;
 
 			$operator = ilAdvancedQuestionPoolStatisticsConstantTranslator::getOperatorforKey($trigger->getOperator());

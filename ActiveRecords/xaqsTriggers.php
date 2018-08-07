@@ -138,6 +138,12 @@ class xaqsTriggers extends ActiveRecord {
 		$this->trigger_name = $trigger_name;
 	}
 
+    /**
+     * @return string
+     */
+    public function getTriggerNameFormatted() {
+        return ilAdvancedTestStatisticsPlugin::getInstance()->txt($this->trigger_name);
+    }
 
 	/**
 	 * @return int
@@ -154,6 +160,12 @@ class xaqsTriggers extends ActiveRecord {
 		$this->operator = $operator;
 	}
 
+    /**
+     * return String returns <, >, = etc.
+     */
+    public function getOperatorFormatted() {
+        return ilAdvancedTestStatisticsConstantTranslator::getOperatorforKey($this->getOperator());
+    }
 
 	/**
 	 * @return int

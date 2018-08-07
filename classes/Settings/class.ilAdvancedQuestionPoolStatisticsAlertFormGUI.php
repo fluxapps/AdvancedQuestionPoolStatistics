@@ -57,17 +57,8 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
             'nr_tests_passed' => $this->pl->txt('nr_tests_passed'),
             'avg_points_passed' => $this->pl->txt('avg_points_passed'),
             'avg_passed_test_time' => $this->pl->txt('avg_passed_test_time'),
+            'qst_percentage' => $this->pl->txt('qst_percentage')
         );
-
-		$qst_pool = new ilObjQuestionPool($this->ref_id);
-		$question_ids = $qst_pool->getAllQuestions();
-		$questions = $qst_pool->getQuestionDetails($question_ids);
-
-		foreach ($questions as $question) {
-			$this->extendedFields[$question['question_id']] = $question['title'];
-		}
-
-
 
 		parent::__construct();
 

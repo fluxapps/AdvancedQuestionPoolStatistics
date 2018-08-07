@@ -9,21 +9,28 @@ class ilAdvancedQuestionPoolStatisticsSender {
 	Const NOTIFICATIONNAME = 'statisticsPoolNotification';
 
 
-	public function createNotification($course_id,$usr_id,$ref_id,$trigger){
+	public function createNotification($course_id, $usr_id, $ref_id, $trigger, $trigger_values){
+        global $ilCtrl;
+        $sender = new srNotificationInternalMailSender(new ilObjUser(6), new ilObjUser($usr_id));
+        $qst_pool = new ilObjQuestionPool($ref_id,true);
 
-		$sender = new srNotificationInternalMailSender(new ilObjUser(6), new ilObjUser($usr_id));
+        $ilCtrl->setParameterByClass('ilObjQuestionPoolGUI', 'ref_id', $trigger->getRefId());
+        $placeholders = array(
+            'course' => new ilObjCourse($course_id,true),
+            'test' => $qst_pool,
+            'test_url' => ILIAS_HTTP_PATH . '/' . $ilCtrl->getLinkTargetByClass('ilObjQuestionPoolGUI'),
+            'trigger' => $trigger,
+            'trigger_values' => $trigger_values
+        );
 
+        try {
+            $notification = srNotification::getInstanceByName(self::NOTIFICATIONNAME);
+            $notification->send($sender,$placeholders);
+        }
 
-		$placeholders = array('course' => new ilObjCourse($course_id,true),'trigger' => $trigger, 'pool' => new ilObjQuestionPool($ref_id,true));
-
-		try{
-			$notification = srNotification::getInstanceByName(self::NOTIFICATIONNAME);
-			$notification->send($sender,$placeholders);
-		}
-
-		catch (Exception $e){
-			return $e;
-		}
+        catch (Exception $e){
+            return $e;
+        }
 	}
 
 }

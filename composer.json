@@ -42,7 +42,8 @@
       "../../../../../../../Services/Logging",
       "../../../../../../../Modules/Course",
       "../../../../../../../Modules/Group",
-      "../../../../../../../Modules/Test"
+      "../../../../../../../Modules/Test",
+      "../../../../../../../Modules/TestQuestionPool"
     ]
   },
   "config": {
