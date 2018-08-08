@@ -52,6 +52,37 @@ class ilAdvancedQuestionPoolStatisticsPlugin extends ilUserInterfaceHookPlugin
 		exit();
 	}
 
+    /**
+     * @return ilObjCourse
+     * @throws Exception
+     */
+    public function getParentCourse($ref_id = 0) {
+        $ref_id = $ref_id ? $ref_id : $_GET['ref_id'];
+        require_once 'Services/Object/classes/class.ilObjectFactory.php';
+        $parent = ilObjectFactory::getInstanceByRefId($this->getParentCourseId($ref_id));
+
+        return $parent;
+    }
+
+
+    /**
+     * @param $ref_id
+     *
+     * @return int
+     * @throws Exception
+     */
+    public function getParentCourseId($ref_id) {
+        global $tree;
+        while (!in_array(ilObjCourse::_lookupType($ref_id, true), array( 'crs', 'grp' ))) {
+            if ($ref_id == 1 || !$ref_id) {
+                throw new Exception("Parent of ref id {$ref_id} is neither course nor group.");
+            }
+            $ref_id = $tree->getParentId($ref_id);
+        }
+
+        return $ref_id;
+    }
+
 }
 
 ?>
