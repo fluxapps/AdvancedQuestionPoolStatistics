@@ -169,7 +169,7 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
 		$xat->setOperator($trigger->getOperator());
 		$xat->setValue($trigger->getValue());
 		$xat->setUserId($trigger->getUserId());
-		$xat->setUserPercentage($trigger->getUserPercentage());
+		$xat->setCompletedThreshold($trigger->getUserPercentage());
 		$xat->setDatesender($trigger->getDatesender());
 		$xat->setIntervalls($trigger->getIntervalls());
 
@@ -201,20 +201,11 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
 			return false;
 		}
 
-		$class = new ilAdvancedTestStatisticsAggResults();
-		$finishedtests = $class->getTotalFinishedTests($this->ref_id);
-		$course_members = count($this->usr_ids);
-
-		// Check if enough people finished the test
-		if((100/$course_members) * $finishedtests < $trigger->getUserPercentage()){
-			return false;
-		}
-
-		$triggername = $trigger->getTriggerName();
         $trigger_value = $trigger->getValue();
         $operator = $trigger->getOperatorFormatted();
 
-        $values_reached = ilAdvancedQuestionPoolStatisticsConstantTranslator::getValues($triggername, $this->ref_id);
+        // the user threshold is checked in this method
+        $values_reached = ilAdvancedQuestionPoolStatisticsConstantTranslator::getValues($trigger, $this->ref_id);
         $trigger_values = "\n";
         foreach ($values_reached as $qst_id => $value_reached) {
             if (!eval('return ' . $value_reached . ' ' . $operator . ' ' . $trigger_value . ';')) {

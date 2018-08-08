@@ -54,17 +54,21 @@ class ilAdvancedQuestionPoolStatisticsConstantTranslator {
 
 
     /**
-     * @param $key
+     * the user threshold is checked in this method
+     *
+     * @param $trigger xaqsTriggers
      * @param $ref_id
      * @return array
      */
-	public static function getValues($key, $ref_id){
+	public static function getValues($trigger, $ref_id){
         $qst_pool = new ilObjQuestionPool($ref_id);
         $question_ids = $qst_pool->getAllQuestions();
 
         $valuesreached = array();
         foreach ($question_ids as $qst_id) {
-            $valuesreached[$qst_id] = assQuestion::_getTotalRightAnswers($qst_id);
+            if (assQuestion::_getTotalAnswers($qst_id) >= $trigger->getCompletedThreshold()) {
+                $valuesreached[$qst_id] = assQuestion::_getTotalRightAnswers($qst_id);
+            }
         }
 
         return $valuesreached;

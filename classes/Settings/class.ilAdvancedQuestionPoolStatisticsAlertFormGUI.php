@@ -44,19 +44,6 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 		$this->setFormAction($this->ctrl->getFormAction($this->parent_gui));
 
         $this->extendedFields = array(
-            "avg_points_finished" => $this->pl->txt("avg_points_finished"),
-            "avg_result_passed" => $this->pl->txt("avg_result_passed"),
-            "avg_result_finished" => $this->pl->txt("avg_result_finished"),
-            "avg_result_finished_run_one" => $this->pl->txt("avg_result_finished_run_one"),
-            "avg_result_passed_run_one" => $this->pl->txt("avg_result_passed_run_one"),
-            "avg_result_passed_run_two"  => $this->pl->txt("avg_result_passed_run_two"),
-            "avg_result_finished_run_two" => $this->pl->txt("avg_result_finished_run_two"),
-            'nr_participants_started' => $this->pl->txt('nr_participants_started'),
-            'nr_tests_finished' => $this->pl->txt('nr_tests_finished'),
-            'avg_test_time' => $this->pl->txt('avg_test_time'),
-            'nr_tests_passed' => $this->pl->txt('nr_tests_passed'),
-            'avg_points_passed' => $this->pl->txt('avg_points_passed'),
-            'avg_passed_test_time' => $this->pl->txt('avg_passed_test_time'),
             'qst_percentage' => $this->pl->txt('qst_percentage')
         );
 
@@ -108,7 +95,7 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 
 		$te = new ilNumberInputGUI($this->pl->txt('form_user_completed'),'user_completed');
 		$te->setRequired(true);
-		$te->setInfo('Condition how many users completed the test (%) of course members');
+		$te->setInfo('The trigger is only checked if a question has been completed this many times');
 		$this->addItem($te);
 
 		$te = new ilDateTimeInputGUI($this->pl->txt('form_date'),'date');
@@ -167,7 +154,7 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 		$this->object->setOperator($this->getInput('operator'));
 		$this->object->setValue($this->getInput('value'));
 		$this->object->setUserId(ilObjUser::_lookupId($this->getInput('user')));
-		$this->object->setUserPercentage($this->getInput('user_completed'));
+		$this->object->setCompletedThreshold($this->getInput('user_completed'));
 		$date = $this->getInput('date');
 		$timestamp = strtotime($date['date']);
 		$this->object->setDatesender($timestamp);
@@ -187,7 +174,7 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
             'operator' => $this->object->getOperator(),
             'value' => $this->object->getValue(),
             'user' => ilObjUser::_lookupLogin($this->object->getUserId()),
-            'user_completed' => $this->object->getUserPercentage(),
+            'user_completed' => $this->object->getCompletedThreshold(),
             'date' => array("date" => date('Y-m-d', $this->object->getDatesender())),
             'interval' => $this->object->getIntervalls()
         );

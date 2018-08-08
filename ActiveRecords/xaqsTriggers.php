@@ -61,7 +61,7 @@ class xaqsTriggers extends ActiveRecord {
 	 * @con_fieldtype   integer
 	 * @con_length      8
 	 */
-	protected $user_percentage;
+	protected $completed_threshold;
 	/**
 	 * @var string
 	 *
@@ -194,16 +194,16 @@ class xaqsTriggers extends ActiveRecord {
 	/**
 	 * @return int
 	 */
-	public function getUserPercentage() {
-		return $this->user_percentage;
+	public function getCompletedThreshold() {
+		return $this->completed_threshold;
 	}
 
 
 	/**
-	 * @param int $user_percentage
+	 * @param int $completed_threshold
 	 */
-	public function setUserPercentage($user_percentage) {
-		$this->user_percentage = $user_percentage;
+	public function setCompletedThreshold($completed_threshold) {
+		$this->completed_threshold = $completed_threshold;
 	}
 
 

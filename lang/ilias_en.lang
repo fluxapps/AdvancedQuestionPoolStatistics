@@ -9,17 +9,17 @@ cols_id #:# ID
 cols_title #:# Trigger
 cols_operator #:# Operator
 cols_value #:# Value
-cols_inform #:# User
+cols_inform #:# Notified User
 cols_date #:# Date
 cols_interval #:# Interval
-cols_usercomplete #:# User completed (%)
+cols_usercomplete #:# Question completed threshold
 cols_actions #:# Actions
 
 form_trigger #:# Trigger
 form_operator #:# Operator
 form_value #:# Value
-form_user #:# User
-form_user_completed #:# User completed
+form_user #:# Notified User
+form_user_completed #:# Question completed threshold
 form_date #:# Date
 form_interval #:# Interval
 

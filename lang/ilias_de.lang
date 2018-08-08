@@ -12,14 +12,14 @@ cols_value #:# Wert
 cols_inform #:# Benutzer
 cols_date #:# Datum
 cols_interval #:# Intervall
-cols_usercomplete #:# Benutzer abgeschlossen (%)
+cols_usercomplete #:# Benutzer abgeschlossen
 cols_actions #:# Aktionen
 
 form_trigger #:# Trigger
 form_operator #:# Operator
 form_value #:# Wert
 form_user #:# Benutzer
-form_user_completed #:# Benutzer abgeschlossen (%)
+form_user_completed #:# Benutzer abgeschlossen
 form_date #:# Datum
 form_interval #:# Interval
 
