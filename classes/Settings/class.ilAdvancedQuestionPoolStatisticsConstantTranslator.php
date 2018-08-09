@@ -67,7 +67,7 @@ class ilAdvancedQuestionPoolStatisticsConstantTranslator {
         $valuesreached = array();
         foreach ($question_ids as $qst_id) {
             if (assQuestion::_getTotalAnswers($qst_id) >= $trigger->getCompletedThreshold()) {
-                $valuesreached[$qst_id] = assQuestion::_getTotalRightAnswers($qst_id);
+                $valuesreached[$qst_id] = assQuestion::_getTotalRightAnswers($qst_id) * 100;
             }
         }
 
