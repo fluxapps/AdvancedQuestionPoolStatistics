@@ -60,8 +60,8 @@ class ilAdvancedQuestionPoolStatisticsConstantTranslator {
      * @param $ref_id
      * @return array
      */
-	public static function getValues($trigger, $ref_id){
-        $qst_pool = new ilObjQuestionPool($ref_id);
+	public static function getValues($trigger){
+        $qst_pool = new ilObjQuestionPool($trigger->getRefId());
         $question_ids = $qst_pool->getAllQuestions();
 
         $valuesreached = array();
