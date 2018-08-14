@@ -17,8 +17,8 @@ class ilAdvancedQuestionPoolStatisticsSender {
         $ilCtrl->setParameterByClass('ilObjQuestionPoolGUI', 'ref_id', $trigger->getRefId());
         $placeholders = array(
             'course' => new ilObjCourse($course_id,true),
-            'test' => $qst_pool,
-            'test_url' => ILIAS_HTTP_PATH . '/' . $ilCtrl->getLinkTargetByClass('ilObjQuestionPoolGUI'),
+            'qst_pool' => $qst_pool,
+            'qst_pool_url' => ILIAS_HTTP_PATH . '/' . $ilCtrl->getLinkTargetByClass('ilObjQuestionPoolGUI'),
             'trigger' => $trigger,
             'trigger_values' => $trigger_values
         );
