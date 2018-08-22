@@ -9,17 +9,22 @@ class ilAdvancedQuestionPoolStatisticsAccess {
 	 */
 	protected $ref_id;
 
-
+    /**
+     * ilAdvancedQuestionPoolStatisticsAccess constructor.
+     * @param $ref_id
+     */
 	public function __construct($ref_id) {
 		$this->pl = ilAdvancedQuestionPoolStatisticsPlugin::getInstance();
 		$this->ref_id = $ref_id;
 	}
 
-
+    /**
+     * @return bool
+     */
 	public function hasCurrentUserAlertAccess() {
 		global $ilAccess;
 
-		if ($ilAccess->checkAccess("statistics", "", $this->ref_id)) {
+		if ($ilAccess->checkAccess("write", "", $this->ref_id)) {
 			return true;
 		}
 
