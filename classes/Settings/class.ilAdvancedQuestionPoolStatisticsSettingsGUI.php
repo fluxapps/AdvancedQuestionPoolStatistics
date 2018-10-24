@@ -137,7 +137,7 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
 		}
 
 		$this->tpl->setContent($form->getHTML());
-
+        $this->tpl->show();
 	}
 
 
@@ -154,6 +154,7 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
         }
 
         $this->tpl->setContent($form->getHTML());
+        $this->tpl->show();
     }
 
 	/**
