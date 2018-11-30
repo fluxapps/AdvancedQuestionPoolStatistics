@@ -52,7 +52,11 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
 		$this->test = ilObjectFactory::getInstanceByRefId($this->ref_id);
 
 		$this->tree = $tree;
-        $this->ref_id_course = $this->pl->getParentCourseId($this->ref_id);
+		try {
+            $this->ref_id_course = $this->pl->getParentCourseId($this->ref_id);
+        } catch (Exception $e) {
+		    $this->ref_id_course = 0;
+        }
         $this->usr_ids = ilCourseMembers::getData($this->ref_id_course);
 	}
 
