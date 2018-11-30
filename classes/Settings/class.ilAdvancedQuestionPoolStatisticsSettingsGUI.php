@@ -47,7 +47,7 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
 		$this->ref_id = $_GET['ref_id'];
 		$this->tabs = $ilTabs;
 		$this->pl = ilAdvancedQuestionPoolStatisticsPlugin::getInstance();
-		$this->ctrl->saveParameterByClass($this,'ref_id');
+		$this->ctrl->saveParameter($this,'ref_id');
 		$this->ctrl->setParameterByClass(ilAdvancedQuestionPoolStatisticsSettingsGUI::class,'ref_id',$this->ref_id);
 		$this->test = ilObjectFactory::getInstanceByRefId($this->ref_id);
 

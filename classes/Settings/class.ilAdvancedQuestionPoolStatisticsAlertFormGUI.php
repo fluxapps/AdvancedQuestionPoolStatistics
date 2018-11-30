@@ -155,7 +155,8 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 		$this->object->setValue($this->getInput('value'));
 		$this->object->setUserId(ilObjUser::_lookupId($this->getInput('user')));
 		$this->object->setCompletedThreshold($this->getInput('user_completed'));
-		$timestamp = strtotime($this->getInput('date'));
+		$date = $this->getInput('date');
+		$timestamp = strtotime(ILIAS_VERSION_NUMERIC >= "5.3" ? $date : $date['date']);
 		$this->object->setDatesender($timestamp);
 		$this->object->setIntervalls($this->getInput('interval'));
 
@@ -167,14 +168,15 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
      *
      */
     public function fillForm(){
-		$array = array(
+        $date = date('Y-m-d', $this->object->getDatesender());
+        $array = array(
             'trigger_id' => $this->object->getId(),
             'trigger' => $this->object->getTriggerName(),
             'operator' => $this->object->getOperator(),
             'value' => $this->object->getValue(),
             'user' => ilObjUser::_lookupLogin($this->object->getUserId()),
             'user_completed' => $this->object->getCompletedThreshold(),
-            'date' => date('Y-m-d', $this->object->getDatesender()),
+            'date' => (ILIAS_VERSION_NUMERIC >= "5.3" ? $date : ["date" => $date]) ,
             'interval' => $this->object->getIntervalls()
         );
 		$this->setValuesByArray($array);
