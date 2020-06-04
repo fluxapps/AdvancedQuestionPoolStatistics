@@ -39,6 +39,44 @@ class ilAdvancedQuestionPoolStatisticsPlugin extends ilUserInterfaceHookPlugin
         }
     }
 
+    /**
+     * @param string $component
+     * @param string $event
+     * @param array $parameters
+     */
+    public function handleEvent($component, $event, $parameters) {
+        switch ($component) {
+            case 'Modules/Object':
+                switch ($event) {
+                    case 'cloneObject':
+                        if (!($parameters['object'] instanceof ilObjQuestionPool)) {
+                            return;
+                        }
+                        /**
+                         * @var $new_obj      ilObjQuestionPool
+                         * @var $original_obj ilObjQuestionPool
+                         */
+                        $new_obj = $parameters['object'];
+                        $original_obj = $parameters['cloned_from_object'];
+                        /** @var xaqsTriggers $trigger */
+                        foreach (xaqsTriggers::where(['ref_id' => $original_obj->getRefId()])->get() as $trigger) {
+                            $new_trigger = new xaqsTriggers();
+                            $new_trigger->setValue($trigger->getValue());
+                            $new_trigger->setDatesender($trigger->getDatesender());
+                            $new_trigger->setIntervalls($trigger->getIntervalls());
+                            $new_trigger->setOperator($trigger->getOperator());
+                            $new_trigger->setRefId($new_obj->getRefId());
+                            $new_trigger->setTriggerName($trigger->getTriggerName());
+                            $new_trigger->setUserId($trigger->getUserId());
+                            $new_trigger->setCompletedThreshold($trigger->getCompletedThreshold());
+                            $new_trigger->create();
+                        }
+                        break;
+                }
+                break;
+        }
+    }
+
 	/**
 	 * async auto complete method for user filter in overview
 	 */
