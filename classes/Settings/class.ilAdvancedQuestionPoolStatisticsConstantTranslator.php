@@ -56,7 +56,7 @@ class ilAdvancedQuestionPoolStatisticsConstantTranslator {
     /**
      * the user threshold is checked in this method
      *
-     * @param $trigger xaqsTriggers
+     * @param $trigger xaqsTriggers|xatsTriggers
      * @param $ref_id
      * @return array
      */

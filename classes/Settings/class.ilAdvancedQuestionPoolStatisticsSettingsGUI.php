@@ -165,6 +165,7 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
 	 * copy the trigger
 	 */
 	public function copyTrigger(){
+	    /** @var xaqsTriggers $trigger */
 		$trigger = xaqsTriggers::find($_GET[self::IDENTIFIER_TRIGGER]);
 
 		$xat = new xaqsTriggers();
@@ -173,7 +174,7 @@ class ilAdvancedQuestionPoolStatisticsSettingsGUI {
 		$xat->setOperator($trigger->getOperator());
 		$xat->setValue($trigger->getValue());
 		$xat->setUserId($trigger->getUserId());
-		$xat->setCompletedThreshold($trigger->getUserPercentage());
+		$xat->setCompletedThreshold($trigger->getCompletedThreshold());
 		$xat->setDatesender($trigger->getDatesender());
 		$xat->setIntervalls($trigger->getIntervalls());
 

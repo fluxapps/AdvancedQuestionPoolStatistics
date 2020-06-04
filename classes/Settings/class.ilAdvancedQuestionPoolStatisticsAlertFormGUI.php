@@ -90,6 +90,7 @@ class ilAdvancedQuestionPoolStatisticsAlertFormGUI extends ilPropertyFormGUI {
 			ilAdvancedQuestionPoolStatisticsPlugin::class
 		), ilAdvancedQuestionPoolStatisticsPlugin::CMD_ADD_USER_AUTO_COMPLETE, "", true));
 		$user->setInfo('User which will receive the notification');
+		$user->setRequired(true);
 		$this->addItem($user);
 
 
