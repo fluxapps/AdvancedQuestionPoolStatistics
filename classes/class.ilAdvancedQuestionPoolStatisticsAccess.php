@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once'./libs/composer/vendor/autoload.php';
 
-//TODO ACCESS CONTROL
 class ilAdvancedQuestionPoolStatisticsAccess {
 
 	/**

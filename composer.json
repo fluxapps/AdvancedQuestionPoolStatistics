@@ -23,27 +23,7 @@
     "classmap": [
       "./classes/",
       "./ActiveRecords/",
-      "../AdvancedTestStatistics/classes",
-      "../../../../../../../Services/UIComponent",
-      "../../../../../../../Services/Table",
-      "../../../../../../../Services/Form",
-      "../../../../../../../Services/Repository",
-      "../../../../../../../Services/Component",
-      "../../../../../../../Services/ActiveRecord",
-      "../../../../../../../Services/UIComponent",
-      "../../../../../../../Services/Utilities",
-      "../../../../../../../Services/GlobalCache",
-      "../../../../../../../Services/Tracking",
-      "../../../../../../../Services/Calendar",
-      "../../../../../../../Services/WebAccessChecker",
-      "../../../../../../../Services/AccessControl",
-      "../../../../../../../Services/InfoScreen",
-      "../../../../../../../Services/Link",
-      "../../../../../../../Services/Logging",
-      "../../../../../../../Modules/Course",
-      "../../../../../../../Modules/Group",
-      "../../../../../../../Modules/Test",
-      "../../../../../../../Modules/TestQuestionPool"
+      "../AdvancedTestStatistics/classes"
     ]
   },
   "config": {
