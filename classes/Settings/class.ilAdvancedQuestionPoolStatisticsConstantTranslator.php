@@ -65,8 +65,9 @@ class ilAdvancedQuestionPoolStatisticsConstantTranslator {
         $question_ids = $qst_pool->getAllQuestions();
 
         $valuesreached = array();
+        $assQuestion = new assTextQuestion(); // this is to avoid a non-static warning for _getTotalAnswers
         foreach ($question_ids as $qst_id) {
-            if (assQuestion::_getTotalAnswers($qst_id) >= $trigger->getCompletedThreshold()) {
+            if ($assQuestion->_getTotalAnswers($qst_id) >= $trigger->getCompletedThreshold()) {
                 $valuesreached[$qst_id] = assQuestion::_getTotalRightAnswers($qst_id) * 100;
             }
         }
